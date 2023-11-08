@@ -22,8 +22,12 @@ function CartModal({ productList, onCloseCart, onRemoveFromCart }) {
         <ul>
           {productList.map((product, index) => (
             <li key={index}>
-              Product Name: {product.productName} - Description: {product.description} - Price: ${product.price} - Size: {product.size} - Quantity: {product.quantity}
-              <button onClick={() => handleRemoveFromCart(product)}>Remove</button>
+              Product Name: {product.productName} - Description:{" "}
+              {product.description} - Price: ${product.price} - Size:{" "}
+              {product.size} - Quantity: {product.quantity}
+              <button onClick={() => handleRemoveFromCart(product)}>
+                Remove
+              </button>
             </li>
           ))}
         </ul>
