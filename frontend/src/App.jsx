@@ -1,13 +1,13 @@
-import  { useState } from 'react';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [productList, setProductList] = useState([]);
   const [formData, setFormData] = useState({
-    productName: '',
-    description: '',
-    price: '',
-    size: 'Medium',
+    productName: "",
+    description: "",
+    price: "",
+    size: "Medium",
     quantity: 1,
   });
   const [cartCount, setCartCount] = useState(0);
@@ -25,10 +25,10 @@ function App() {
     const product = { ...formData };
     setProductList([...productList, product]);
     setFormData({
-      productName: '',
-      description: '',
-      price: '',
-      size: 'Medium',
+      productName: "",
+      description: "",
+      price: "",
+      size: "Medium",
       quantity: 1,
     });
   };
@@ -100,7 +100,9 @@ function App() {
         {productList.map((product, index) => (
           <div className="product" key={index}>
             <p>
-              Product Name: {product.productName} - Description: {product.description} - Price: ${product.price} - Size: {product.size} - Quantity: {product.quantity}
+              Product Name: {product.productName} - Description:{" "}
+              {product.description} - Price: ${product.price} - Size:{" "}
+              {product.size} - Quantity: {product.quantity}
             </p>
             <button
               onClick={() => {
@@ -123,7 +125,9 @@ function App() {
             <ul>
               {productList.map((product, index) => (
                 <li key={index}>
-                  Product Name: {product.productName} - Description: {product.description} - Price: ${product.price} - Size: {product.size} - Quantity: {product.quantity}
+                  Product Name: {product.productName} - Description:{" "}
+                  {product.description} - Price: ${product.price} - Size:{" "}
+                  {product.size} - Quantity: {product.quantity}
                 </li>
               ))}
             </ul>
