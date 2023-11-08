@@ -1,22 +1,48 @@
 /* Common styles for all screen sizes */
 .product {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.product p {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.product button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 600px) {
+  .product {
+    padding: 5px; /* Reduce padding for product items on small screens */
+    margin: 5px 0; /* Reduce margin for product items on small screens */
   }
-  
+
   .product p {
-    font-weight: bold;
-    margin-bottom: 5px;
+    font-size: 18px; /* Adjust font size for product item text on small screens */
   }
-  
+
   .product button {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
+    padding: 3px 8px; /* Adjust button padding for small screens */
   }
-  
+}
+
+/* Responsive styles for all devices, including mobile */
+@media (max-width: 800px) {
+  .product p {
+    font-size: 16px; /* Further adjust font size for product item text on mobile screens */
+  }
+
+  .product button {
+    padding: 2px 6px; /* Further adjust button padding for mobile screens */
+  }
+}

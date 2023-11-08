@@ -67,7 +67,7 @@ button {
   cursor: pointer;
 }
 
-/* Responsive styles */
+/* Responsive styles for smaller screens */
 @media (max-width: 600px) {
   .form-section {
     flex-basis: calc(50% - 10px);
@@ -75,6 +75,37 @@ button {
 
   .product {
     flex-basis: 100%;
+  }
+}
+
+/* Responsive styles for all devices, including mobile */
+@media (max-width: 800px) {
+  .form-section {
+    flex-basis: 100%; /* Full width for form sections on small screens */
+  }
+
+  form {
+    padding: 10px; /* Reduce form padding for small screens */
+  }
+
+  .product-list {
+    margin-top: 10px; /* Reduce margin for product list on small screens */
+  }
+
+  .product {
+    margin: 5px 0; /* Reduce margin for product items on small screens */
+  }
+
+  .cart-button button {
+    padding: 8px 16px; /* Adjust button padding for small screens */
+  }
+
+  .cart-content {
+    padding: 10px; /* Reduce padding for the cart modal content on small screens */
+  }
+
+  .close {
+    font-size: 24px; /* Adjust close button font size for small screens */
   }
 }
 
@@ -89,7 +120,7 @@ button {
   background-color: #ff5722;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 4px;
   cursor: pointer;
 }

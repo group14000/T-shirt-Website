@@ -1,36 +1,64 @@
 /* Common styles for all screen sizes */
 .form-section {
-    flex-basis: calc(33.33% - 10px);
-    margin-bottom: 10px;
+  flex-basis: calc(33.33% - 10px);
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 600px) {
+  .form-section {
+    flex-basis: calc(50% - 10px); /* Reduce form section width for smaller screens */
   }
-  
+
   label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+    font-size: 14px; /* Adjust label font size for small screens */
   }
-  
+
   input,
   select {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    font-size: 14px; /* Adjust input and select font size for small screens */
   }
-  
+
   button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
+    padding: 8px 16px; /* Adjust button padding for small screens */
   }
-  
-  /* Responsive styles */
-  @media (max-width: 600px) {
-    .form-section {
-      flex-basis: calc(50% - 10px);
-    }
+}
+
+/* Responsive styles for all devices, including mobile */
+@media (max-width: 800px) {
+  label {
+    font-size: 12px; /* Further adjust label font size for mobile screens */
   }
-  
+
+  input,
+  select {
+    font-size: 12px; /* Further adjust input and select font size for mobile screens */
+  }
+
+  button {
+    padding: 6px 12px; /* Further adjust button padding for mobile screens */
+  }
+}
