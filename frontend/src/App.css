@@ -72,7 +72,7 @@ button {
   .form-section {
     flex-basis: calc(50% - 10px);
   }
-  
+
   .product {
     flex-basis: 100%;
   }
@@ -94,7 +94,7 @@ button {
   cursor: pointer;
 }
 
-/* Add this CSS for the modal */
+/* Styles for the modal */
 .cart-modal {
   display: block;
   position: fixed;

@@ -1,7 +1,13 @@
-import { useState } from "react";
+// App.js
+import { useState, useEffect } from "react";
 import "./App.css";
+import ProductForm from "./component/ProductForm";
+import ProductItem from "./component/ProductItem";
+import CartModal from "./component/CartModal";
 
 function App() {
+  // Retrieve data from local storage on initial load
+  const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const [productList, setProductList] = useState([]);
   const [formData, setFormData] = useState({
     productName: "",
@@ -10,8 +16,14 @@ function App() {
     size: "Medium",
     quantity: 1,
   });
-  const [cartCount, setCartCount] = useState(0);
+  const [cartCount, setCartCount] = useState(storedCartItems.length);
   const [showCart, setShowCart] = useState(false);
+  const [cartItems, setCartItems] = useState(storedCartItems);
+
+  useEffect(() => {
+    // Save cart items to local storage whenever it changes
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -33,106 +45,36 @@ function App() {
     });
   };
 
+  const handleAddToCart = (product) => {
+    setCartItems([...cartItems, product]);
+    setCartCount(cartCount + 1);
+    setShowCart(true);
+  };
+
+  const handleRemoveFromCart = (product) => {
+    const updatedCartItems = cartItems.filter((item) => item !== product);
+    setCartItems(updatedCartItems);
+    setCartCount(cartCount - 1);
+  };
+
+  const handleCloseCart = () => {
+    setShowCart(false);
+  };
+
   return (
     <div className="App">
       <div className="cart-button">
         <button onClick={() => setShowCart(true)}>Cart ({cartCount})</button>
       </div>
       <h1>Add Products</h1>
-      <form>
-        <div className="form-section">
-          <label htmlFor="productName">Product Name:</label>
-          <input
-            type="text"
-            id="productName"
-            name="productName"
-            value={formData.productName}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-section">
-          <label htmlFor="description">Description:</label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-section">
-          <label htmlFor="price">Price:</label>
-          <input
-            type="number"
-            id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-section">
-          <label>Size:</label>
-          <select
-            name="size"
-            value={formData.size}
-            onChange={handleInputChange}
-          >
-            <option value="Large">Large</option>
-            <option value="Medium">Medium</option>
-            <option value="Small">Small</option>
-          </select>
-        </div>
-        <div className="form-section">
-          <label htmlFor="quantity">Quantity:</label>
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            value={formData.quantity}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button type="button" onClick={handleSubmit}>
-          Submit
-        </button>
-      </form>
+      <ProductForm formData={formData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
       <div className="product-list">
         {productList.map((product, index) => (
-          <div className="product" key={index}>
-            <p>
-              Product Name: {product.productName} - Description:{" "}
-              {product.description} - Price: ${product.price} - Size:{" "}
-              {product.size} - Quantity: {product.quantity}
-            </p>
-            <button
-              onClick={() => {
-                setCartCount(cartCount + 1);
-                setShowCart(true);
-              }}
-            >
-              Add to Cart
-            </button>
-          </div>
+          <ProductItem key={index} product={product} onAddToCart={() => handleAddToCart(product)} />
         ))}
       </div>
       {showCart && (
-        <div className="cart-modal">
-          <div className="cart-content">
-            <span className="close" onClick={() => setShowCart(false)}>
-              &times;
-            </span>
-            <h2>Shopping Cart</h2>
-            <ul>
-              {productList.map((product, index) => (
-                <li key={index}>
-                  Product Name: {product.productName} - Description:{" "}
-                  {product.description} - Price: ${product.price} - Size:{" "}
-                  {product.size} - Quantity: {product.quantity}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <CartModal productList={cartItems} onCloseCart={handleCloseCart} onRemoveFromCart={handleRemoveFromCart} />
       )}
     </div>
   );
